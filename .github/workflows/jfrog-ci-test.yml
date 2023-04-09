@@ -61,4 +61,5 @@ jobs:
     - name: Test Haproxy config
       run: |
         cat .generated/jfrog.fcc | yq '.storage.files[5]' > /tmp/test.cfg
+        cat /tmp/test.cfg
         haproxy -f /tmp/test.cfg -c
