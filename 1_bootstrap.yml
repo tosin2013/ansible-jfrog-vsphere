@@ -13,6 +13,7 @@
         mode: '0755'
       tags:
         - preflight
+        - cicd_testing
 
     - name: Get the absolute path to the generation directory
       shell: "cd {{ generated_asset_directory }} && pwd"
@@ -24,6 +25,7 @@
       tags:
         - preflight
         - ssh_keypair
+        - cicd_testing
 
     - name: Test connection to vSphere
       community.vmware.vmware_cluster_info:
@@ -52,6 +54,7 @@
           when: not iso_check.stat.exists
       tags:
         - download_fcos
+        - cicd_testing
 
     - name: Download Butane/fcct
       block:
@@ -73,6 +76,7 @@
             mode: '0755'
       tags:
         - download_butane
+        - cicd_testing
 
     ## DEPRECIATED - Can just upload the OVA and create a VM directly, no need to upload the OVA
     # - name: Upload the FCOS OVA
@@ -131,6 +135,7 @@
             ign_file: "{{ lookup('file', '{{ generated_asset_directory }}/transpiled_config.ign') | b64encode }}"
       tags:
         - create_ignition_file
+        - cicd_testing
 
     - name: Create the VM Template from the FCOS OVA
       block:

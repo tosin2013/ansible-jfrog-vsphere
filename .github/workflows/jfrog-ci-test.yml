@@ -57,5 +57,5 @@ jobs:
         yq eval 'del(.additionalTrustBundle)' vars_tmp.yml >> vars.yml
         cat /tmp/self-signed.crt | sed 's/^/  /' | sed '1s/^/additionalTrustBundle: |\n/' >> vars.yml
         cat vars.yml
-        ansible-playbook -e "@vars.yml" 1_bootstrap.yml -t create_ignition_file
+        ansible-playbook -e "@vars.yml" 1_bootstrap.yml -t cicd_testing,create_ignition_file,
         ls -lath -R  ./.generated

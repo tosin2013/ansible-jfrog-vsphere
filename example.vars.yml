@@ -136,6 +136,6 @@ additionalTrustBundle: |
 generated_asset_directory: ./.generated
 
 fcos_stream: stable
-fcos_version: 35.20220313.3.1
+fcos_version: 37.20230322.3.0
 
 butane_release: "v0.14.0"
