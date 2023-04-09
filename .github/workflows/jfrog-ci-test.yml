@@ -16,7 +16,7 @@ jobs:
 
     - name: Install HAproxy
       run: |
-        apt install haproxy
+        sudo apt install haproxy -y
 
     - name: Install Ansible
       run: |
