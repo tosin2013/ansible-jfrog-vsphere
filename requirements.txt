@@ -2,4 +2,4 @@ pyvmomi
 argparse
 requests
 suds
-suds-jurko==0.6
+suds-jurko
