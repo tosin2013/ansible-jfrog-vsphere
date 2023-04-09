@@ -55,8 +55,7 @@ jobs:
         echo "Key: /tmp/self-signed.key"
         sed -i "s|/mnt/remoteWork/bundle_haproxy-api.core-ocp.d70.lab.kemo.network.cert.pem|/tmp/self-signed.key|" vars_tmp.yml
         yq eval 'del(.additionalTrustBundle)' vars_tmp.yml >> vars.yml
-        cat /tmp/self-signed.crt | sed 's/^/  /' | sed '1s/^/additionalTrustBundle: |\n/'
-        exit 1
+        cat /tmp/self-signed.crt | sed 's/^/  /' | sed '1s/^/additionalTrustBundle: |\n/' >> vars.yml
         cat vars.yml
         ansible-playbook -e "@vars.yml" 1_bootstrap.yml -t create_ignition_file
         ls -lath -R  ./.generated
