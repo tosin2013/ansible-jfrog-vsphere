@@ -44,6 +44,7 @@ jobs:
         # Print paths of generated files
         echo "Certificate: /tmp/self-signed.crt"
         echo "Key: /tmp/self-signed.key"
+        cat /tmp/self-signed.crt /path/to/ca.crt > /tmp/trust-bundle.crt
     - name: Deploy JFrog to FCOS Testing
       run: |
         curl -OL  https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
@@ -54,7 +55,7 @@ jobs:
         echo "Key: /tmp/self-signed.key"
         sed -i "s|/mnt/remoteWork/bundle_haproxy-api.core-ocp.d70.lab.kemo.network.cert.pem|/tmp/self-signed.key|" vars_tmp.yml
         yq eval 'del(.additionalTrustBundle)' vars_tmp.yml >> vars.yml
-        cat /tmp/self-signed.crt | sed 's/^/  /' | sed '1s/^/additionalTrustBundle: |\n/' >> vars.yml
+        cat /tmp/trust-bundle.crt | sed 's/^/  /' | sed '1s/^/additionalTrustBundle: |\n/' >> vars.yml
         cat vars.yml
         ansible-playbook -e "@vars.yml" 1_bootstrap.yml -t cicd_testing,create_ignition_file,
         ls -lath -R  ./.generated
