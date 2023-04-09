@@ -1,4 +1,4 @@
-name: Podman Deployment CI
+name: JFrog CI testing for Fedora
 
 on:
   push:
@@ -16,4 +16,4 @@ jobs:
 
     - name: Test code
       run: |
-      ls -lath . #cat .generated/jfrog.fcc | yq '.storage.files[5]'  
+        ls -lath . #cat .generated/jfrog.fcc | yq '.storage.files[5]'  
