@@ -27,3 +27,9 @@ jobs:
     - name: Install needed Ansible Collections
       run: |
         ansible-galaxy collection install -r ./collections/requirements.yml
+
+    - name: Deploy JFrog to FCOS Testing
+      run: |
+        cp example.vars.yml vars.yml
+        ansible-playbook -e "@vars.yml" 1_bootstrap.yml -t create_ignition_file
+        ls -lath -R  ./.generated
