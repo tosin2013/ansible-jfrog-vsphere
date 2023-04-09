@@ -35,8 +35,20 @@ jobs:
       run: |
         ansible-galaxy collection install -r ./collections/requirements.yml
 
+    - name: Genereate ssl cert
+      run: | 
+        openssl req -newkey rsa:2048 -nodes -keyout /tmp/self-signed.key -x509 -days 365 -out /tmp/self-signed.crt -subj "/CN=localhost"
+
+        # Verify certificate
+        openssl x509 -noout -text -in /tmp/self-signed.crt
+
+        # Print paths of generated files
+        echo "Certificate: /tmp/self-signed.crt"
+        echo "Key: /tmp/self-signed.key"
     - name: Deploy JFrog to FCOS Testing
       run: |
         cp example.vars.yml vars.yml
+        echo "Certificate: /tmp/self-signed.crt"
+        echo "Key: /tmp/self-signed.key"
         ansible-playbook -e "@vars.yml" 1_bootstrap.yml -t create_ignition_file
         ls -lath -R  ./.generated
