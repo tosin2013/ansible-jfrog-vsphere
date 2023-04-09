@@ -14,9 +14,16 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Install HAProxy 2.2.
+      uses: timwolla/action-install-haproxy@main
+      id: install-haproxy
+      with:
+        branch: "2.2"
+        use_openssl: yes
+
     - name: Install HAproxy
       run: |
-        sudo apt install haproxy -y
+        haproxy -h
 
     - name: Install Ansible
       run: |
