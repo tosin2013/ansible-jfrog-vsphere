@@ -1,5 +1,7 @@
 # Deploy JFrog to vSphere on Fedora CoreOS
 
+[![JFrog CI testing for Fedora](https://github.com/tosin2013/ansible-jfrog-vsphere/actions/workflows/jfrog-ci-test.yml/badge.svg)](https://github.com/tosin2013/ansible-jfrog-vsphere/actions/workflows/jfrog-ci-test.yml)
+
 ## Prerequisites
 
 - Install Ansible: `python3 -m pip install ansible`
