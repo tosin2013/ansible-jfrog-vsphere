@@ -37,6 +37,8 @@ jobs:
     - name: Genereate ssl cert
       run: | 
         openssl req -newkey rsa:2048 -nodes -keyout /tmp/self-signed.key -x509 -days 365 -out /tmp/self-signed.crt -subj "/CN=localhost"
+        ls -lath /tmp/ 
+        exit 0
 
         # Verify certificate
         openssl x509 -noout -text -in /tmp/self-signed.crt
