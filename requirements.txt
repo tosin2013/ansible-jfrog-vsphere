@@ -1,5 +1,5 @@
 pyvmomi
 argparse
 requests
-suds>=0.4,<0.7 ; python_version < '3.10.6'
-suds-jurko ; python_version >= '3.10.6'
+suds>=0.4,<0.7 ; python_version =< '3.10.6'
+suds-jurko ; python_version
