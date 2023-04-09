@@ -47,8 +47,14 @@ jobs:
         echo "Key: /tmp/self-signed.key"
     - name: Deploy JFrog to FCOS Testing
       run: |
-        cp example.vars.yml vars.yml
+        wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
+        chmod +x /usr/bin/yq
+        cp example.vars.yml vars_tmp.yml
         echo "Certificate: /tmp/self-signed.crt"
         echo "Key: /tmp/self-signed.key"
+        sed -i "s|/mnt/remoteWork/bundle_haproxy-api.core-ocp.d70.lab.kemo.network.cert.pem|/tmp/self-signed.key|" vars_tmp.yml
+        yq eval 'del(.additionalTrustBundle)' vars_tmp.yml >> output.yml
+        cat /tmp/self-signed.crt | sed 's/^/  /' | sed '1s/^/additionalTrustBundle: |\n/' vars.yml
+        cat vars.ymls
         ansible-playbook -e "@vars.yml" 1_bootstrap.yml -t create_ignition_file
         ls -lath -R  ./.generated
