@@ -260,7 +260,7 @@ systemd:
         RemainAfterExit=yes
         ExecStartPre=-/bin/podman kill haproxy
         ExecStartPre=-/bin/podman rm -f -i haproxy
-        ExecStartPre=/bin/podman pull docker.io/library/haproxy:latest
-        ExecStart=podman run -dt --name haproxy --sysctl net.ipv4.ip_unprivileged_port_start=0 -p 80:80 -p 443:443 -v /etc/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:Z -v /etc/haproxy.crt:/etc/haproxy.crt:Z docker.io/library/haproxy:latest
+        ExecStartPre=/bin/podman pull quay.io/takinosh/haproxy:latest
+        ExecStart=podman run -dt --name haproxy --sysctl net.ipv4.ip_unprivileged_port_start=0 -p 80:80 -p 443:443 -v /etc/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:Z -v /etc/haproxy.crt:/etc/haproxy.crt:Z quay.io/takinosh/haproxy:latest
         [Install]
         WantedBy=multi-user.target
