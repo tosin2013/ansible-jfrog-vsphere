@@ -2,4 +2,3 @@ pyvmomi
 argparse
 requests
 suds
-suds-jurko

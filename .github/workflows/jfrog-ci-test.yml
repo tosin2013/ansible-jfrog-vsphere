@@ -22,7 +22,6 @@ jobs:
     - name: Install needed pip modules
       run: |
         python3 --version
-        python3 -m pip install suds-jurko
         python3 -m pip install -r ./requirements.txt
 
     - name: Install needed Ansible Collections
