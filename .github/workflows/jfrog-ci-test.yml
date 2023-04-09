@@ -47,8 +47,9 @@ jobs:
         echo "Key: /tmp/self-signed.key"
     - name: Deploy JFrog to FCOS Testing
       run: |
-        wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq &&\
-        chmod +x /usr/bin/yq
+        curl -OL  https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+        chmod +x yq_linux_amd64
+        sudo mv yq_linux_amd64  /usr/bin/yq
         cp example.vars.yml vars_tmp.yml
         echo "Certificate: /tmp/self-signed.crt"
         echo "Key: /tmp/self-signed.key"
