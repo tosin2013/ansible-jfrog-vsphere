@@ -21,10 +21,6 @@ jobs:
         branch: "2.2"
         use_openssl: yes
 
-    - name: Install HAproxy
-      run: |
-        haproxy -h
-
     - name: Install Ansible
       run: |
         python3 -m pip install ansible
