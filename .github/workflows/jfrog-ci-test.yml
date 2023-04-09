@@ -24,7 +24,6 @@ jobs:
     - name: Install Ansible
       run: |
         python3 -m pip install ansible
-        # ls -lath . #cat .generated/jfrog.fcc | yq '.storage.files[5]'
 
     - name: Install needed pip modules
       run: |
@@ -59,3 +58,7 @@ jobs:
         cat vars.yml
         ansible-playbook -e "@vars.yml" 1_bootstrap.yml -t cicd_testing,create_ignition_file,
         ls -lath -R  ./.generated
+    - name: Test Haproxy config
+      run: |
+        cat .generated/jfrog.fcc | yq '.storage.files[5]' > /tmp/test.cfg
+        haproxy -f /tmp/test.cfg -c
